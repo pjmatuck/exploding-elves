@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3794bc6eb6a3b34ab5bd13884ca2ede, type: 3}
+  m_Name: White
+  m_EditorClassIdentifier: 
+  speed: 10
+  color: 2
+  spawningTime: 0.75
+  activeMaterial: {fileID: 2100000, guid: 58777ed67818c22448d1b52df7b77280, type: 2}
+  inactiveMaterial: {fileID: 2100000, guid: 4e1b03b360a3f4b4fb992af44e131204, type: 2}
