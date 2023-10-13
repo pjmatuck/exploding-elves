@@ -6,9 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Models/Spawner")]
 public class SpawnerModel : ScriptableObject
 {
-    [SerializeField] float spawnTime;
-    [SerializeField] bool limitSpawning;
-    [SerializeField] int limitSize;
+    [SerializeField] float spawnSpeed;
+    [SerializeField] bool limitInstances;
+    [SerializeField] int limitInstancesCount;
+    [SerializeField] bool spawnOnDemand;
 
     int spawnerId;
     public int SpawnerId
@@ -16,19 +17,19 @@ public class SpawnerModel : ScriptableObject
         get { return spawnerId; }
         set { spawnerId = value; }
     }
-
-    public float SpawnTime
+    public float SpawnTime => 1f / SpawnSpeed;
+    public float SpawnSpeed
     {
-        get { return spawnTime; }
-        set { 
-            spawnTime = value; 
-            OnSpawnTimeChanges(SpawnerId);
+        get { return spawnSpeed; }
+        set
+        {
+            spawnSpeed = value;
+            OnSpawnSpeedChanges(SpawnerId);
         }
     }
+    public bool LimitSpawning => limitInstances;
+    public int LimitSize => limitInstancesCount;
+    public bool SpawnOnDemand => spawnOnDemand;
 
-    public float SpawnSpeed => 1f / SpawnTime;
-    public bool LimitSpawning => limitSpawning;
-    public int LimitSize => limitSize;
-
-    public event Action<int> OnSpawnTimeChanges;
+    public event Action<int> OnSpawnSpeedChanges;
 }
