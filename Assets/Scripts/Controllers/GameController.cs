@@ -4,31 +4,29 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, IGameService
 {
     [Serializable]
     public class Players
     {
-        public Transform spot;
-        public GameObject playerObject;
-
-        [HideInInspector]
-        public ElfController ElfController
-        {
-            get { return playerObject.GetComponent<ElfController>();}
-        }
+        public Transform SceneSpot;
+        public ElfController Elf;
+        public AbstractSpawnerController Spawner;
     }
 
     [SerializeField] List<Players> players;
+    [SerializeField] VFXSpawnerController vfxController;
+    [SerializeField] ParticleSystem explosionEffect;
+    public VFXSpawnerController VfxSpawner => vfxController;
 
-    List<SpawnerController> spawners;
     List<UIPlayerControlView> viewControllers;
 
     int playersCount;
 
     void Start()
     {
-        spawners = new List<SpawnerController>();
+        ServiceLocator.Instance.Register(this);
+
         viewControllers = new List<UIPlayerControlView>();
 
         //playersCount = PlayerPrefs.GetInt("PlayersCount");
@@ -37,6 +35,8 @@ public class GameController : MonoBehaviour
         SetupPlayers();
 
         SetupControls();
+
+        SetupVFX();
     }
 
     private void SetupControls()
@@ -46,30 +46,34 @@ public class GameController : MonoBehaviour
 
         for(int i = 0; i < playersCount; i++)
         {
+            var spawner = players[i].Spawner;
             var uiPlayerControlGameObject = Instantiate(uiPlayerControl, uiController.ControlsHolder);
             var uiPlayerControlView = uiPlayerControlGameObject.GetComponent<UIPlayerControlView>();
-            uiPlayerControlView.BindSpeedControl(spawners[i].IncreaseSpawnSpeed, spawners[i].DecreaseSpawnSpeed);
-            uiPlayerControlView.SetPlayerName(players[i].ElfController.Model.Color.ToString());
-            uiPlayerControlView.SetSpawnSpeed(spawners[i].Model.SpawnSpeed);
+            uiPlayerControlView.BindSpeedControl(spawner.IncreaseSpawnSpeed, spawner.DecreaseSpawnSpeed);
+            uiPlayerControlView.SetPlayerName(players[i].Elf.Model.Color.ToString());
+            uiPlayerControlView.SetSpawnSpeed(spawner.Model.SpawnSpeed);
             viewControllers.Add(uiPlayerControlView);
         }
     }
 
     private void SetupPlayers()
     {
-        var spawner = Resources.Load("Prefabs/Spawner/Spawner");
-
         for(int i = 0; i < playersCount; i++) 
         {
-            var spawnerGameObject = Instantiate(spawner, players[i].spot);
-            var spawnerController = spawnerGameObject.GetComponent<SpawnerController>();
-            spawnerController.InitSpawner(players[i].playerObject, OnSpawnTimeChangesHandler, i);
-            spawners.Add(spawnerController);
+            var spawnerController = (ElfSpawnerController)Instantiate(players[i].Spawner, players[i].SceneSpot);
+            spawnerController.SetSpawningObject(players[i].Elf.gameObject);
+            spawnerController.SetupListeners(OnSpawnTimeChangesHandler, i);
         }
+    }
+
+    void SetupVFX()
+    {
+        vfxController = Instantiate(vfxController, this.transform);
+        vfxController.SetSpawningObject(explosionEffect);
     }
 
     void OnSpawnTimeChangesHandler(int spawnerId)
     {
-        viewControllers[spawnerId].SetSpawnSpeed(spawners[spawnerId].Model.SpawnSpeed);
+        viewControllers[spawnerId].SetSpawnSpeed(players[spawnerId].Spawner.Model.SpawnSpeed);
     }
 }
