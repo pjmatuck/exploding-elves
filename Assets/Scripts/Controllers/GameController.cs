@@ -29,8 +29,7 @@ public class GameController : MonoBehaviour, IGameService
 
         viewControllers = new List<UIPlayerControlView>();
 
-        //playersCount = PlayerPrefs.GetInt("PlayersCount");
-        playersCount = 4;
+        playersCount = PlayerPrefs.GetInt("PlayersCount");
 
         SetupPlayers();
 
