@@ -1,28 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool
+public class ObjectPool<T> where T : Object
 {
-    Queue<GameObject> poolQueue;
+    Queue<T> poolQueue;
 
     public ObjectPool()
     {
-        poolQueue = new Queue<GameObject>();
+        poolQueue = new Queue<T>();
     }
 
-    public bool TryGetObject(out GameObject go)
+    public bool TryGetObject(out T obj)
     {
-        go = null;
+        obj = null;
 
         if (poolQueue.Count == 0)
             return false;
         
-        go = poolQueue.Dequeue();
+        obj = poolQueue.Dequeue();
         return true;
     }
 
-    public void Return(GameObject go)
+    public void Return(T obj)
     {
-        poolQueue.Enqueue(go);
+        poolQueue.Enqueue(obj);
     }
 }
