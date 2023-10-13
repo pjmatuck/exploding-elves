@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class IncreaseSpawnSpeedCommand : ICommand
 {
     SpawnerModel spawnerModel;
@@ -13,6 +9,6 @@ public class IncreaseSpawnSpeedCommand : ICommand
 
     public void Execute()
     {
-        spawnerModel.SpawnTime -= .1f;
+        spawnerModel.SpawnSpeed += .1f;
     }
 }
