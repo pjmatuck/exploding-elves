@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a258265e286366e409ac613992ef55a4, type: 3}
   m_Name: Spawner3
   m_EditorClassIdentifier: 
-  spawnSpeed: 1
+  spawnSpeed: 2.4999998
   limitInstances: 1
   limitInstancesCount: 1000
   spawnOnDemand: 0
+  doNotUseObjectPool: 0

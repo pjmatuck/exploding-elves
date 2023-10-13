@@ -22,7 +22,7 @@ public class ElfSpawnerController : AbstractSpawnerController
 
         GameObject spawnedObject = GetObject();
 
-        SetupObject(spawnedObject, position, Quaternion.Euler(new Vector3(0, 90, 0)));
+        SetupObject(spawnedObject, position, Quaternion.identity);
     }
 
     private void SetupObject(GameObject spawnedObject, Vector3 position, Quaternion rotation)
@@ -44,13 +44,23 @@ public class ElfSpawnerController : AbstractSpawnerController
 
     protected GameObject GetObject()
     {
+        if (Model.DoNotUseObjectPool)
+            return InstantiateObject();
+
         GameObject spawnedObject;
         if (!_pool.TryGetObject(out spawnedObject))
         {
-            spawnedObject = Instantiate(_spawningObject);
-            spawnedObject.SetActive(false);
+            spawnedObject = InstantiateObject();
         }
 
+        return spawnedObject;
+    }
+
+    GameObject InstantiateObject()
+    {
+        var spawnedObject = Instantiate(_spawningObject);
+        spawnedObject.transform.rotation = this.transform.rotation;
+        spawnedObject.SetActive(false);
         return spawnedObject;
     }
 
@@ -77,6 +87,12 @@ public class ElfSpawnerController : AbstractSpawnerController
 
     protected void TakeObjectBack(GameObject go)
     {
+        if(Model.DoNotUseObjectPool)
+        {
+            Destroy(go);
+            return;
+        }
+
         go.SetActive(false);
         _pool.Return(go);
     }

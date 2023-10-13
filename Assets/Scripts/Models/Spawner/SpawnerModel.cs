@@ -10,6 +10,7 @@ public class SpawnerModel : ScriptableObject
     [SerializeField] bool limitInstances;
     [SerializeField] int limitInstancesCount;
     [SerializeField] bool spawnOnDemand;
+    [SerializeField] bool doNotUseObjectPool;
 
     int spawnerId;
     public int SpawnerId
@@ -30,6 +31,7 @@ public class SpawnerModel : ScriptableObject
     public bool LimitSpawning => limitInstances;
     public int LimitSize => limitInstancesCount;
     public bool SpawnOnDemand => spawnOnDemand;
+    public bool DoNotUseObjectPool => doNotUseObjectPool;
 
     public event Action<int> OnSpawnSpeedChanges;
 }

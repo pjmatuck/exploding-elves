@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   color: 2
-  spawningTime: 0.75
+  spawningTime: 1
   activeMaterial: {fileID: 2100000, guid: 58777ed67818c22448d1b52df7b77280, type: 2}
   inactiveMaterial: {fileID: 2100000, guid: 4e1b03b360a3f4b4fb992af44e131204, type: 2}

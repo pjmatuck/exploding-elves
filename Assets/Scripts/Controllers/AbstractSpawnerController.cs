@@ -21,6 +21,9 @@ public abstract class AbstractSpawnerController : MonoBehaviour
     {
         _transform = this.transform;
         _audioController = ServiceLocator.Instance.Get<AudioController>();
+
+        if (Model.DoNotUseObjectPool) return;
+
         InitPool();
     }
 
