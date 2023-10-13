@@ -64,9 +64,11 @@ public class ElfSpawnerController : AbstractSpawnerController
             case ElfCollisionType.SameColor:
                 if (!handlingCollision)
                     SpawnObject(collisionPosition);
+                _audioController.PlaySimpleHit();
                 break;
             case ElfCollisionType.DifferentColor:
                 go.GetComponent<ElfController>().OnCollision -= OnCollisionHandle;
+                _audioController.PlayExplosion();
                 TakeObjectBack(go);
                 gameController.VfxSpawner.SpawnExplosion(collisionPosition);
                 break;

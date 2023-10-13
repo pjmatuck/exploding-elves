@@ -10,6 +10,7 @@ public abstract class AbstractSpawnerController : MonoBehaviour
 
     protected int spawnedObjectsCounter = 0;
     protected Transform _transform;
+    protected AudioController _audioController;
 
     float elapsedSpawnTime = 0;
     protected abstract void InitPool();
@@ -19,6 +20,7 @@ public abstract class AbstractSpawnerController : MonoBehaviour
     void Start()
     {
         _transform = this.transform;
+        _audioController = ServiceLocator.Instance.Get<AudioController>();
         InitPool();
     }
 

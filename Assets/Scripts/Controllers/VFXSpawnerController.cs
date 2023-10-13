@@ -28,7 +28,6 @@ public class VFXSpawnerController : AbstractSpawnerController
         if (particleSystem != null)
         {
             particleSystem.Play();
-            //Invoke(nameof(DisableEffect), _spawningObject.main.duration);
             StartCoroutine(DisableEffect(particleSystem, particleSystem.main.duration));
         }
     }
