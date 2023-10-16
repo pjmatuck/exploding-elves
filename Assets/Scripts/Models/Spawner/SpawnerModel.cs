@@ -18,12 +18,14 @@ public class SpawnerModel : ScriptableObject
         get { return spawnerId; }
         set { spawnerId = value; }
     }
-    public float SpawnTime => 1f / SpawnSpeed;
+    public float SpawnTime => SpawnSpeed > 0 ? 1f / SpawnSpeed : float.MaxValue;
     public float SpawnSpeed
     {
         get { return spawnSpeed; }
         set
         {
+            if (value < 0f)
+                value = 0f;
             spawnSpeed = value;
             OnSpawnSpeedChanges(SpawnerId);
         }
