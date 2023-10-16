@@ -1,6 +1,10 @@
-# exploding-elves
 Exploding Elves
 -
+Instructions to Play using Unity Editor
+- 
+1. Go to Assets/Scenes folder
+2. Open the GameStartUIScene
+3. Click on play
 
 This project was planned to be developed in a kind of waterfall mode. Divided into "Runs", the strategy was create the main mechanics first and than iterate to improve them. The improvements complies since computing resources management until experience regarding the game in general.
 
@@ -24,7 +28,7 @@ The Object Pool was created using Queue and in a non-lazy mode. Instead of insta
 
 RUN #4
 -
-In the third run the UI was included to control the objects spawn speed. Also following the adaptation of MVC pattern, in this case a View script was adopted to expose Views properties and allows controllers bind model data in UI elements. As we can see between UIPlayerControlView.cs, AbstractSpawnerController.cs and Spawners models.
+In the fourth run the UI was included to control the objects spawn speed. Also following the adaptation of MVC pattern, in this case a View script was adopted to expose Views properties and allows controllers bind model data in UI elements. As we can see between UIPlayerControlView.cs, AbstractSpawnerController.cs and Spawners models.
 The UI actions were developed using a Command pattern, allowing the encapsulation of these actions inside objects.
 At this moment the project had two systems: Spawners and UI. To create a relationship among them a Service Locator pattern was implemented.
 
