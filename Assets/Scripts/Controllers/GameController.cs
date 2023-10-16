@@ -25,11 +25,15 @@ public class GameController : MonoBehaviour, IGameService
 
     void Start()
     {
+        Debug.Log("[GameController] Start");
         ServiceLocator.Instance.Register(this);
 
         viewControllers = new List<UIPlayerControlView>();
 
         playersCount = PlayerPrefs.GetInt("PlayersCount");
+
+        //In case game did not initialize from StartGameUIScene.
+        if (playersCount == 0) playersCount = 4;
 
         SetupPlayers();
 
