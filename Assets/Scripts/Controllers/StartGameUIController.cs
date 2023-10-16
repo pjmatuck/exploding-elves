@@ -44,6 +44,7 @@ public class StartGameUIController : MonoBehaviour
 
         startGame.onClick.AddListener(() =>
         {
+            PlayerPrefs.SetInt("PlayersCount", PlayersCount);
             SceneManager.LoadScene("GameScene");
         });
     }
