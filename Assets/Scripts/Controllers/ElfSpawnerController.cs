@@ -20,6 +20,8 @@ public class ElfSpawnerController : AbstractSpawnerController
     {
         if (Model.LimitSpawning && spawnedObjectsCounter >= Model.LimitSize) return;
 
+        spawnedObjectsCounter++;
+
         GameObject spawnedObject = GetObject();
 
         SetupObject(spawnedObject, position, Quaternion.identity);
