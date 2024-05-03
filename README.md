@@ -1,3 +1,7 @@
+A game created to test concurrency and objects count.
+
+![image](https://github.com/pjmatuck/exploding-elves/assets/3275775/0c287bb3-48a2-4557-8342-1042e6499e2f)
+
 Exploding Elves
 -
 Instructions to Play using Unity Editor
@@ -54,3 +58,6 @@ An background image and some camera adjustements were applied for visual improve
 RUN #9
 -
 Tests and setup improvements.
+
+![image](https://github.com/pjmatuck/exploding-elves/assets/3275775/deb7ff81-93c4-43b3-bf87-aad77bb5578e)
+
